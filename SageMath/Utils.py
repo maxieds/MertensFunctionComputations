@@ -5,8 +5,9 @@
 from sage.all import *
 
 def AssertInteger(n):
-    if not isinstance(n, int) and not isinstance(n, sage.rings.integer.Integer):
-        raise ValueError("Input {0} is not a positive integer: {1}".format(n, type(n)))
+    if not isinstance(n, int) and not isinstance(n, sage.rings.integer.Integer) and \
+       (isinstance(n, sage.rings.rational.Rational) and not n.is_integer()):
+        raise ValueError("Input {0} is not an integer: {1}".format(n, type(n)))
     return True
 
 

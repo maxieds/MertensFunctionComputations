@@ -27,11 +27,26 @@ def PrimeNuOmegaFunc(n):
 def PrimeBigOmegaFunc(n):
     AssertPositiveInteger(n)
     bigOmegaPari = "bigomega({0})".format(n)
-    return pari(bigOmegaPari)
+    return int(pari(bigOmegaPari))
 
 def PrimesList(x):
     AssertIntegerGreaterThan(x, 1)
     return prime_range(1, x)
+
+## Algorithm of Lehmer taken from:
+## https://www.ams.org/journals/mcom/1960-14-072/S0025-5718-1960-0120198-5/S0025-5718-1960-0120198-5.pdf
+@cached_function
+def LiouvilleL(x):
+    AssertNonNegativeInteger(x)
+    if n == 0:
+        return 0
+    elif n == 1:
+        return 1
+    gval = ceil(sqrt(x))
+    LSum1 = sum(MertensM(floor(x / k**2)) for k in range(1, gval + 1)) 
+    LSum2 = sum(moebius(ell) * floor(sqrt(x / ell)) for ell in range(1, floor(x / gval**2) + 1)) 
+    LTerm3 = MertensM(floor(x / gval**2)) * floor(sqrt(x / gval**2))
+    return LSum1 + LSum2 - LTerm3
 
 def LiouvilleLambda(n):
     AssertPositiveInteger(n)
@@ -52,5 +67,19 @@ def CknFunc(k, n):
         return divSum
     return 0
 
+def CFunc(n):
+    return CknFunc(PrimeBigOmegaFunc(n), n)
+
+@cached_function
+def GSummatoryFunc(x):
+    AssertPositiveInteger(x)
+    return sum(CFunc(n) * LiouvilleLambda(n) * MertensM(floor(x/n)) for n in range(1, x+1))
+
+def gInvFunc(n):
+    AssertPositiveInteger(n)
+    if n == 1:
+        return 1
+    else:
+        return GSummatoryFunc(n) - GSummatoryFunc(n-1)
 
 
