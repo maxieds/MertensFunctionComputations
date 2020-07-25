@@ -26,7 +26,7 @@ def GetGInvSummatoryFuncSignChanges(xmin, xmax):
     signChangeXList = []
     for x in range(xmin, xmax + 2):
         if sign(GSummatoryFunc(x + 1)) != sign(GSummatoryFunc(x)): 
-            signChangeXList.append([x + 1])
+            signChangeXList.append(x + 1)
     return signChangeXList
 
 def PlotGInvSummatoryFuncSignChanges(xmin, xmax):
@@ -34,7 +34,7 @@ def PlotGInvSummatoryFuncSignChanges(xmin, xmax):
     AssertNonNegativeInteger(xmax - xmin)
     signChangeXList = GetGInvSummatoryFuncSignChanges(xmin, xmax)
     signChangeXListXAxis = range(1, len(signChangeXList) + 1)
-    yPlotFuncValues = [log(log(x)) for x in signChangeXList]
+    yPlotFuncValues = [n(log(log(x))) for x in signChangeXList]
     plotXAxis = r''
     plotYAxis = r'Values of $x$ where the sign changes'
     plotTitle = r'Values of $x \geq 2$ such that \\ $sgn(G^{-1}(x)) \neq sgn(G^{-1}(x-1))$'
