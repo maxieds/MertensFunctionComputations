@@ -40,7 +40,7 @@ def PlotGInvSummatoryFuncSignChanges(xmin, xmax):
     plotTitle = r'Values of $x \geq 2$ such that \\ $sgn(G^{-1}(x)) \neq sgn(G^{-1}(x-1))$'
     plt.rc('text', usetex=True)
     plt.rc('font', family='serif')
-    plt.plot(signChangeXListXAxis, signChangeXList, 'bs', xPlotFuncValues, yPlotFuncValues, 'g--')
+    plt.plot(signChangeXListXAxis, signChangeXList, 'bs', range(1, len(signChangeXList) + 1), yPlotFuncValues, 'g--')
     plt.title(plotTitle)
     plt.xlabel(plotXAxis)
     plt.ylabel(plotYAxis)
