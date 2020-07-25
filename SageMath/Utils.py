@@ -37,10 +37,10 @@ def PrintTableInLaTeXForm(tbl, newlineAfter = 0):
 
 def GetTempFileSavePath(fileExt, basePath = "TempFile", baseDir = TempFileDirectory):
     strftimeFmt = "{0}/{1}-%Y%m%d%H%M%s.{2}".format(baseDir, basePath, fileExt)
-    return datetime.strftime(strftimeFmt)
+    return datetime.now().strftime(strftimeFmt)
 
 def DisplayImage(imgPath):
-    #image = Image.open(imgPath)
-    #image.show()
-    show(imgPath)
+    image = Image.open(imgPath)
+    image.show()
+    #show(imgPath)
 
