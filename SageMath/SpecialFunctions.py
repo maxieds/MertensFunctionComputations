@@ -33,20 +33,10 @@ def PrimesList(x):
     AssertIntegerGreaterThan(x, 1)
     return prime_range(1, x)
 
-## Algorithm of Lehmer taken from:
-## https://www.ams.org/journals/mcom/1960-14-072/S0025-5718-1960-0120198-5/S0025-5718-1960-0120198-5.pdf
 @cached_function
 def LiouvilleL(x):
-    AssertNonNegativeInteger(x)
-    if n == 0:
-        return 0
-    elif n == 1:
-        return 1
-    gval = ceil(sqrt(x))
-    LSum1 = sum(MertensM(floor(x / k**2)) for k in range(1, gval + 1)) 
-    LSum2 = sum(moebius(ell) * floor(sqrt(x / ell)) for ell in range(1, floor(x / gval**2) + 1)) 
-    LTerm3 = MertensM(floor(x / gval**2)) * floor(sqrt(x / gval**2))
-    return LSum1 + LSum2 - LTerm3
+    AssertPositiveInteger(x)
+    return sum(MertensM(floor(x / d**2)) for d in range(1, floor(sqrt(x)) + 1))
 
 def LiouvilleLambda(n):
     AssertPositiveInteger(n)

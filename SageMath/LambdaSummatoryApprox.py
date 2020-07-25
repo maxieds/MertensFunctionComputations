@@ -4,16 +4,18 @@
 
 from sage.all import *
 
+from GlobalConfig import *
 from Utils import *
 from SpecialFunctions import *
 
+@cached_function
 def LiouvilleL0(x):
     AssertPositiveInteger(x)
     return sum(MertensM(floor(x / d**2)) for d in range(1, floor(sqrt(x)) + 1))
 
 def LiouvilleLSignRatio(x):
     AssertPositiveInteger(x)
-    return sign(LiouvilleL(x)) / ((-1) ** ceil(log(log(x))))
+    return sign(LiouvilleL(x)) / ((-1) ** floor(log(log(x))))
 
 def LiouvilleLApproxV1(x):
     AssertPositiveInteger(x)
@@ -29,7 +31,7 @@ def LambdaAst(n):
     AssertPositiveInteger(n)
     if n == 1:
         return 1
-    return (LiouvilleL(n) - LiouvilleL(n - 1)) * ((-1) ** PrimeNuOmegaFunc(n))
+    return (-1) ** PrimeNuOmegaFunc(n)
 
 def LambdaAstL(x):
     AssertPositiveInteger(x)
@@ -41,10 +43,10 @@ def CHatConstantApprox(x):
 CHatConstant = CHatConstantApprox(1000)
 
 def LambdaAstLApprox(x):
-    AssertIntegerGreaterThan(x, 2)
-    return 2 * CHatConstant / 3.0 * x
+    AssertIntegerGreaterThan(x, e)
+    return x / sqrt(2 * pi) / sqrt(log(log(x)))
 
-def GetApproxTable(xmin, xupper, xvalsPerPage = 75, nprec = 4, quietRunMode = True):
+def GetLambdaApproxTable(xmin, xupper, xvalsPerPage = 75, nprec = DefaultNPrec, quietRunMode = True):
     tblRow = lambda x: [x, LiouvilleL(x), LiouvilleLSignRatio(x), \
                            n(LiouvilleL(x) / LiouvilleLApproxV1(x), nprec), \
                            n(LiouvilleL(x) / LiouvilleLApproxV2(x), nprec), \

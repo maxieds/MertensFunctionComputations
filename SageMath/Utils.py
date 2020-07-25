@@ -24,8 +24,10 @@ def AssertIntegerGreaterThan(n, gthan):
         raise ValueError("Input {0} <= {1}".format(n, gthan))
     return True
 
-def PrintTableInLaTeXForm(tbl):
+def PrintTableInLaTeXForm(tbl, newlineAfter = 0):
     latexArraySep = str(" & ")
-    for tblRow in tbl:
+    for (ridx, tblRow) in enumerate(tbl):
+        if newlineAfter > 0 and (ridx % newlineAfter) == 0:
+            print("")
         print(latexArraySep.join([str(te) for te in tblRow]), " \\\\")
 
