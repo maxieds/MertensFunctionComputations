@@ -15,7 +15,7 @@ def LiouvilleL0(x):
 
 def LiouvilleLSignRatio(x):
     AssertPositiveInteger(x)
-    return sign(LiouvilleL(x)) / ((-1) ** floor(log(log(x))))
+    return sign(LiouvilleL(x)) / ((-1) ** ceil(log(log(x))))
 
 def LiouvilleLApproxV1(x):
     AssertPositiveInteger(x)
