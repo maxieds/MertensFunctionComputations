@@ -24,7 +24,7 @@ def LiouvilleLApproxV1(x):
 
 def LiouvilleLApproxV2(x):
     AssertIntegerGreaterThan(x, e)
-    return (x ** 0.25) / sqrt(log(x)) / sqrt(log(log(x)))
+    return (x ** 0.75) / log(x) / sqrt(log(log(x)))
 
 @cached_function
 def LambdaAst(n):
