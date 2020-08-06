@@ -11,8 +11,8 @@ from LambdaSummatoryApprox import *
 
 def ApproxECFunc(x):
     AssertIntegerGreaterThan(x, e)
-    constTerm = 1
-    funcTerms = log(x) * log(log(x))
+    constTerm = sqrt(2 * pi)
+    funcTerms = log(x) * sqrt(log(log(x)))
     return n(constTerm * funcTerms, DefaultNPrec)
 
 def ExactECFunc(x):
@@ -22,8 +22,8 @@ def ExactECFunc(x):
 
 def ApproxEAbsGInvFunc(x):
     AssertIntegerGreaterThan(x, e)
-    constTerm = 3 / (pi**2)
-    funcTerms = (log(x)**2) * log(log(x))
+    constTerm = 6 / (pi**2) * sqrt(pi / 2)
+    funcTerms = (log(x)**2) * sqrt(log(log(x)))
     return n(constTerm * funcTerms, DefaultNPrec)
 
 def ExactEAbsGInvFunc(x):
