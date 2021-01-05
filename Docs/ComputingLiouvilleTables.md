@@ -2,8 +2,13 @@
 
 ## Implementation 
 
-* Cite the references 
-* Provide images for the relevant formulas 
+We have consulted the formulas from the work of Lehman and D.H. Lehmer on the Liouville lambda function to attempt
+  to put together a reasonably efficient calculation of $M(x)$ when $x$ is finite, but still computationally 
+  challenging (see [AMS reference](https://www.ams.org/journals/mcom/1960-14-072/S0025-5718-1960-0120198-5/) and the 
+  paper *Sign Changes in sums of the Liouville function* by Borwein, et. al.). 
+  Experimentally, just a minimal approximation via this method, taking $g := \sqrt{x}$, allows us to vanquish 
+  *Mathematica*'s built-in routines in ``python3`` using ``sage``.
+  
 
 ## Generating the approximation tables for very large x
 
