@@ -65,6 +65,7 @@ def GSummatoryFunc(x):
     AssertPositiveInteger(x)
     return sum(CFunc(n) * LiouvilleLambda(n) * MertensM(floor(x/n)) for n in range(1, x+1))
 
+@cached_function
 def gInvFunc(n):
     AssertPositiveInteger(n)
     if n == 1:
