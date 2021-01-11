@@ -57,6 +57,7 @@ def CknFunc(k, n):
         return divSum
     return 0
 
+@cached_function
 def CFunc(n):
     return CknFunc(PrimeBigOmegaFunc(n), n)
 
