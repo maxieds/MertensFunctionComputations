@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[     65951,       2027]
+NotebookDataLength[     65975,       2028]
 NotebookOptionsPosition[     64963,       1989]
-NotebookOutlinePosition[     65301,       2004]
-CellTagsIndexPosition[     65258,       2001]
+NotebookOutlinePosition[     65325,       2005]
+CellTagsIndexPosition[     65282,       2002]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -1988,8 +1988,9 @@ Cell[TextData[StyleBox["",
 }, Open  ]]
 },
 WindowSize->{1296, 704},
-WindowMargins->{{0, Automatic}, {0, Automatic}},
-FrontEndVersion->"11.0 for Linux x86 (64-bit) (September 21, 2016)",
+WindowMargins->{{108, Automatic}, {Automatic, 125}},
+FrontEndVersion->"11.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (September \
+21, 2016)",
 StyleDefinitions->"Default.nb"
 ]
 (* End of Notebook Content *)
@@ -2004,29 +2005,29 @@ CellTagsIndex->{}
 (*NotebookFileOutline
 Notebook[{
 Cell[CellGroupData[{
-Cell[580, 22, 981, 19, 175, "Title"],
-Cell[1564, 43, 1444, 52, 108, "Subtitle"],
-Cell[3011, 97, 764, 18, 81, "Subtitle"]
+Cell[580, 22, 981, 19, 172, "Title"],
+Cell[1564, 43, 1444, 52, 107, "Subtitle"],
+Cell[3011, 97, 764, 18, 80, "Subtitle"]
 }, Open  ]],
 Cell[CellGroupData[{
 Cell[3812, 120, 636, 22, 78, "Title"],
-Cell[4451, 144, 2257, 69, 147, "Input"],
+Cell[4451, 144, 2257, 69, 138, "Input"],
 Cell[CellGroupData[{
-Cell[6733, 217, 711, 12, 58, "Subtitle"],
+Cell[6733, 217, 711, 12, 57, "Subtitle"],
 Cell[CellGroupData[{
-Cell[7469, 233, 1166, 34, 79, "Input"],
+Cell[7469, 233, 1166, 34, 75, "Input"],
 Cell[8638, 269, 23185, 717, 1197, "Output"]
 }, Closed]],
 Cell[CellGroupData[{
-Cell[31860, 991, 1164, 34, 73, "Input"],
+Cell[31860, 991, 1164, 34, 69, "Input"],
 Cell[33027, 1027, 29502, 902, 1197, "Output"]
 }, Closed]]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[62578, 1935, 587, 11, 58, "Subtitle"],
-Cell[63168, 1948, 587, 11, 58, "Subtitle"],
-Cell[63758, 1961, 587, 11, 58, "Subtitle"],
-Cell[64348, 1974, 587, 11, 58, "Subtitle"]
+Cell[62578, 1935, 587, 11, 57, "Subtitle"],
+Cell[63168, 1948, 587, 11, 57, "Subtitle"],
+Cell[63758, 1961, 587, 11, 57, "Subtitle"],
+Cell[64348, 1974, 587, 11, 57, "Subtitle"]
 }, Open  ]]
 }, Open  ]]
 }
