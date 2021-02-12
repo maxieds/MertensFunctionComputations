@@ -15,10 +15,11 @@ def MertensM(x):
         return 0
     elif x == 1:
         return 1
-    mertensFuncSum1 = sum(MertensM(floor(x/k)) for k in range(2, floor(sqrt(x)) + 1)) 
-    mertensFuncSum2 = sum((floor(x/k) - floor(x/(k+1))) * MertensM(k) \
-                            for k in range(1, floor(sqrt(x)) + 1)) 
-    return 1 - mertensFuncSum1 - mertensFuncSum2
+    #mertensFuncSum1 = sum(MertensM(floor(x/k)) for k in range(2, floor(sqrt(x)) + 1)) 
+    #mertensFuncSum2 = sum((floor(x/k) - floor(x/(k+1))) * MertensM(k) \
+    #                        for k in range(1, floor(sqrt(x)) + 1)) 
+    #return 1 - mertensFuncSum1 - mertensFuncSum2
+    return sum(moebius(n) for n in range(1, x+1))
 
 def PrimeNuOmegaFunc(n):
     AssertPositiveInteger(n)
