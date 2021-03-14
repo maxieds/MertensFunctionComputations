@@ -14,9 +14,10 @@ PrintTableInLaTeXForm(initTbl)
 print("")
 
 fullXMin=100090
-fullXMax=101000
+fullXMax=100350
 fullXPerPage=75
 fullTbl=GetLambdaApproxTable(fullXMin, fullXMax, fullXPerPage, nPrecMode, quietPrintMode)
-print("Full pages LaTeX table source: \n")
-PrintTableInLaTeXForm(fullTbl, newlineAfter=fullXPerPage)
+print(table(fullTbl))
+#print("Full pages LaTeX table source: \n")
+#PrintTableInLaTeXForm(fullTbl, newlineAfter=fullXPerPage)
 
