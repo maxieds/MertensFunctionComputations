@@ -3,8 +3,12 @@
 #### Created: 2020.07.21
 
 from sage.all import *
-
 from Utils import *
+
+def DoubleFactorial(n):
+    if n < -1:
+        raise ValueError
+    return gamma(n + 1 / 2) * (2 ** n) / sqrt(pi)
 
 ## Algorithm taken from:
 ## https://mathoverflow.net/a/320042
@@ -25,6 +29,7 @@ def PrimeNuOmegaFunc(n):
     AssertPositiveInteger(n)
     return len(prime_divisors(n))
 
+@cached_function
 def PrimeBigOmegaFunc(n):
     AssertPositiveInteger(n)
     bigOmegaPari = "bigomega({0})".format(n)
@@ -45,6 +50,12 @@ def LiouvilleLambda(n):
         return 1
     return LiouvilleL(n) - LiouvilleL(n-1)
 
+def PrimeZetaP(s, nprec=16):
+    if real(s) <= 1 and real(s) > 0:
+        raise NotImplemented
+    maxPrime = ceil(10 ** (nprec / real(s)))
+    return sum(map(lambda p: p ** (-s), prime_range(2, maxPrime + 1)))
+
 @cached_function
 def CknFunc(k, n):
     AssertPositiveInteger(n)
@@ -61,6 +72,14 @@ def CknFunc(k, n):
 @cached_function
 def CFunc(n):
     return CknFunc(PrimeBigOmegaFunc(n), n)
+
+@cached_function
+def CFuncExplicit(n):
+    if n <= 0:
+        return 0
+    elif n == 1:
+        return 1
+    return factorial(PrimeBigOmegaFunc(n)) * product(map(lambda pp: 1 / factorial(pp[1]), list(factor(n))))
 
 @cached_function
 def GSummatoryFunc(x):

@@ -5,7 +5,6 @@
 from sage.all import *
 from PIL import Image
 from datetime import datetime
-
 from GlobalConfig import *
 
 def AssertInteger(n):
@@ -13,7 +12,6 @@ def AssertInteger(n):
        (isinstance(n, sage.rings.rational.Rational) and not n.is_integer()):
         raise ValueError("Input {0} is not an integer: {1}".format(n, type(n)))
     return True
-
 
 def AssertPositiveInteger(n):
     if not AssertInteger(n) or n <= 0:
