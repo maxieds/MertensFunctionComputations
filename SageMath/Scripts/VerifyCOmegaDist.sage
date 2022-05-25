@@ -4,11 +4,27 @@ from sage.all import *
 from SpecialFunctions import *
 
 HIST_NUM_BINS = 650
+B0_CONSTANT = 3.0 / 2.0 
+
+@cached_function
+def GetNormalizedCFuncListWithProgress(xupper, mux, sigmax, printPause=5000):
+    if printPause < 1 or xupper < 1:
+         raise ValueError
+    normalizedFuncValues = []
+    startXMin, curXMin = 1, 1
+    while curXMin <= xupper:
+         normalizedFuncValues += [ (CFunc(n) - mux) / sigmax \
+				   for n in range(curXMin, min(curXMin + printPause, xupper) + 1) ]
+         curXMin += printPause
+         percentComplete = float((curXMin - startXMin) / (xupper + 1 - startXMin))
+         print("   ==> DONE computing #%d of #%d values ... %2.2f%% COMPLETED!" % \
+			(curXMin - startXMin, xupper, percentComplete))
+    return normalizedFuncValues
 
 def DisplayCOmegaDistCDFV1(xupper, withExactCDF=True):
-    mux = log(log(xupper)) * log(log(log(xupper)))
-    sigmax = log(log(xupper)) * log(log(log(xupper)))
-    normalizedFuncValues = [ (CFunc(n) - mux) / sigmax for n in range(1, xupper + 1) ]
+    mux = B0_CONSTANT * log(log(xupper)) * log(log(log(xupper)))
+    sigmax = B0_CONSTANT * log(log(xupper)) * log(log(log(xupper)))
+    normalizedFuncValues = GetNormalizedCFuncListWithProgress(xupper, mux, sigmax)
     stdNormalDist = RealDistribution('gaussian', 1)
     plotMin, plotMax = min(normalizedFuncValues), max(normalizedFuncValues)
     funcHist = histogram(normalizedFuncValues, bins=HIST_NUM_BINS, color='lime', edgecolor='green', hatch='*', 
@@ -21,9 +37,9 @@ def DisplayCOmegaDistCDFV1(xupper, withExactCDF=True):
     return funcHist
 
 def DisplayCOmegaDistCDFV2(xupper, withExactCDF=True):
-    mux = sqrt(log(log(xupper)))
-    sigmax = log(log(xupper))
-    normalizedFuncValues = [ (CFunc(n) - mux) / sigmax for n in range(1, xupper + 1) ]
+    mux = B0_CONSTANT * sqrt(log(log(xupper)))
+    sigmax = B0_CONSTANT * log(log(xupper))
+    normalizedFuncValues = GetNormalizedCFuncListWithProgress(xupper, mux, sigmax)
     stdNormalDist = RealDistribution('gaussian', 1)
     plotMin, plotMax = min(normalizedFuncValues), max(normalizedFuncValues)
     funcHist = histogram(normalizedFuncValues, bins=HIST_NUM_BINS, color='cyan', edgecolor='blue', hatch='x', 
@@ -36,9 +52,9 @@ def DisplayCOmegaDistCDFV2(xupper, withExactCDF=True):
     return funcHist
 
 def DisplayCOmegaDistCDFV3(xupper, withExactCDF=True):
-    mux = log(log(xupper)) * log(log(log(xupper)))
-    sigmax = log(log(xupper)) * log(log(log(xupper)))
-    normalizedFuncValues = [ (CFunc(n) - mux) / sigmax for n in range(1, xupper + 1) ]
+    mux = B0_CONSTANT * log(log(xupper)) * log(log(log(xupper)))
+    sigmax = B0_CONSTANT * log(log(xupper)) * log(log(log(xupper)))
+    normalizedFuncValues = GetNormalizedCFuncListWithProgress(xupper, mux, sigmax)
     stdNormalDist = RealDistribution('gaussian', 1)
     plotMin, plotMax = min(normalizedFuncValues), max(normalizedFuncValues)
     funcHist = histogram(normalizedFuncValues, bins=HIST_NUM_BINS, color='violet', edgecolor='purple', hatch='x', 
@@ -54,11 +70,12 @@ def DisplayCOmegaDistCDFV3(xupper, withExactCDF=True):
 #XUpper = 10000
 XUpper = 1000000
 
-plotV1 = DisplayCOmegaDistCDFV1(XUpper)
-show(plotV1)
+#plotV1 = DisplayCOmegaDistCDFV1(XUpper)
+#show(plotV1)
 
-plotV2 = DisplayCOmegaDistCDFV2(XUpper)
-show(plotV2)
+#plotV2 = DisplayCOmegaDistCDFV2(XUpper)
+#show(plotV2)
 
 plotV3 = DisplayCOmegaDistCDFV3(XUpper)
+print("\n=============================\n")
 show(plotV3)
