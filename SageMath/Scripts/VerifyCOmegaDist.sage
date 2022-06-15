@@ -13,7 +13,7 @@ def GetNormalizedCFuncListWithProgress(xupper, mux, sigmax, printPause=5000):
     normalizedFuncValues = []
     startXMin, curXMin = 1, 1
     while curXMin <= xupper:
-         normalizedFuncValues += [ (CFunc(n) - mux) / sigmax \
+         normalizedFuncValues += [ (log(CFunc(n)) - mux) / sigmax \
 				   for n in range(curXMin, min(curXMin + printPause, xupper) + 1) ]
          curXMin += printPause
          percentComplete = float((curXMin - startXMin) / (xupper + 1 - startXMin))
@@ -28,7 +28,7 @@ def GetNormalizedCFuncListWithProgressV2(xupper, muxFunc, sigmaxFunc, printPause
     normalizedFuncValues = []
     [startXMin, curXMin] = [ ceil(exp(exp(1))) ] * 2
     while curXMin <= xupper:
-         normalizedFuncValues += [ (CFunc(n) - muxFunc(n)) / sigmaxFunc(n) \
+         normalizedFuncValues += [ (log(CFunc(n)) - muxFunc(n)) / sigmaxFunc(n) \
 				   for n in range(curXMin, min(curXMin + printPause, xupper) + 1) ]
          curXMin += printPause
          percentComplete = float((curXMin - startXMin) / (xupper + 1 - startXMin))
