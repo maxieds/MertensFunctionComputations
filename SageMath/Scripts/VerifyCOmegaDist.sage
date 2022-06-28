@@ -31,7 +31,7 @@ def GetNormalizedCFuncListWithProgressV2(xupper, muxFunc, sigmaxFunc, printPause
          normalizedFuncValues += [ (log(CFunc(n)) - muxFunc(n)) / sigmaxFunc(n) \
 				   for n in range(curXMin, min(curXMin + printPause, xupper) + 1) ]
          curXMin += printPause
-         percentComplete = float((curXMin - startXMin) / (xupper + 1 - startXMin))
+         percentComplete = float((curXMin - startXMin) / (xupper + 1 - startXMin)) * 100.0
          print("   ==> DONE computing #%d of #%d values ... %2.2f%% COMPLETED!" % \
 			(curXMin - startXMin, xupper, percentComplete))
     return normalizedFuncValues
@@ -78,7 +78,6 @@ def DisplayCOmegaDistCDFV3(xupper, withExactCDF=True):
         ('edgecolor', 'purple'), 
         ('hatch', 'x'), 
         ('alpha', 0.35), 
-        #('density', True), 
         ('cumulative', True),
     ])
     funcHist = histogram(normalizedFuncValues, **histPlotOptions)
@@ -138,14 +137,50 @@ def DisplayCOmegaDistCDFV4(xupper, withExactCDF=True):
         return (funcHist + overlayPlot, funcHist2 + overlayPlot2)
     return (funcHist, funcHist2)
 
-#XUpper = 5000
-XUpper = 500000
+def DisplayCOmegaDistCDFV5(xupper, withExactCDF=True):
+    mux = lambda nnVar: B0_CONSTANT * log(log(nnVar)) * log(log(log(nnVar)))
+    sigmax = lambda nnVar: B0_CONSTANT * log(log(nnVar)) * log(log(log(nnVar)))
+    normalizedFuncValues = GetNormalizedCFuncListWithProgress(xupper, mux, sigmax)
+    stdNormalDist = RealDistribution('gaussian', 1)
+    plotMin, plotMax = min(normalizedFuncValues), max(normalizedFuncValues)
+    histPlotOptions = dict([
+        ('bins', HIST_NUM_BINS), 
+        ('color', 'violet'), 
+        ('edgecolor', 'purple'), 
+        ('hatch', 'x'), 
+        ('alpha', 0.35), 
+        ('density', True), 
+        ('cumulative', True),
+    ])
+    funcHist = histogram(normalizedFuncValues, **histPlotOptions)
+    histPlotOptions2 = dict([
+        ('bins', HIST_NUM_BINS), 
+        ('color', 'lime'), 
+        ('edgecolor', 'darkgreen'), 
+        ('hatch', 'x'), 
+        ('alpha', 0.35), 
+        ('density', True), 
+    ])
+    funcHist2 = histogram(normalizedFuncValues, **histPlotOptions2)
+    if withExactCDF:
+        stdNormalDistCDF = lambda zz: n(stdNormalDist.cum_distribution_function(zz))
+        overlayPlot = plot(stdNormalDistCDF, (floor(plotMin), ceil(plotMax)), 
+                           color='darkgray', linestyle='--')
+        stdNormalDistPDF = lambda tt: n(stdNormalDist.distribution_function(tt))
+        overlayPlot2 = plot(stdNormalDistPDF, (floor(plotMin), ceil(plotMax)), 
+                           color='darkgray', linestyle='..')
 
-#plotV3 = DisplayCOmegaDistCDFV3(XUpper)
-#print("\n=============================\n")
-#show(plotV3)
+        return (funcHist + overlayPlot, funcHist2 + overlayPlot2)
+    return (funcHist, funcHist2)
+
+#XUpper = 5000
+#XUpper = 500000
+XUpper = 1000000
 
 plotV4 = DisplayCOmegaDistCDFV4(XUpper)
 print("\n=============================\n")
 show(plotV4[0])
-show(plotV4[1])
+
+plotV5 = DisplayCOmegaDistCDFV5(XUpper)
+print("\n=============================\n")
+show(plotV5[0])
